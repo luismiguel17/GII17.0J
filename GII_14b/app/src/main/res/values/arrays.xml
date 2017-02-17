@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--- Elementos para el spinner de selección de periodo de RegistroGlucemias -->
+    <string-array name="spinnerPeriodo">
+        <item>Antes de desayunar</item>
+        <item>Después de desayunar</item>
+        <item>Antes de almorzar</item>
+        <item>Después de almorzar</item>
+        <item>Antes de comer</item>
+        <item>Después de comer</item>
+        <item>Antes de merendar</item>
+        <item>Después de merendar</item>
+        <item>Antes de cenar</item>
+        <item>Después de cenar</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de Incidencias por valores por exceso -->
+    <string-array name="spinnerIncidenciasAlto">
+        <item>Desconocida</item>
+        <item>Comer en exceso</item>
+        <item>Enfermedad</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de Incidencias por valores por defecto -->
+    <string-array name="spinnerIncidenciasBajo">
+        <item>Desconocida</item>
+        <item>Estrés</item>
+        <item>Exceso de ejercicio físico</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección dedel tipo de intensidad de la actividad física -->
+    <string-array name="spinnerIntensidad">
+        <item>Ninguna</item>
+        <item>Larga (más de 2 horas)</item>
+        <item>Media (de 60 a 90 minutos)</item>
+        <item>Irregular e intermitente</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de tipos de ejercicio de intensidad alta -->
+    <string-array name="spinnerIntensidadLarga">
+        <item>Natación</item>
+        <item>Ciclismo</item>
+        <item>Montañismo</item>
+        <item>Senderismo</item>
+        <item>Paseo</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de tipos de ejercicio de intensidad media -->
+    <string-array name="spinnerIntensidaMedia">
+        <item>Fútbol</item>
+        <item>Baloncesto</item>
+        <item>Tenis</item>
+        <item>Balonmano</item>
+        <item>Volleyball</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección de tipos de ejercicio de intensidad irregular -->
+    <string-array name="spinnerIntensidadIrregular">
+        <item>Esquí</item>
+    </string-array>
+    <!--- Elementos para el spinner de selección cuando no se selecciona ejercicio -->
+    <string-array name="spinnerIntensidadNinguna">
+        <item>Ninguno</item>
+    </string-array>
+
+    <!--- Elementos para el spinner de selección del tipo de alimento -->
+    <string-array name="spinerTipoAlimento">
+        <item>Arroz</item>
+        <item>Fruta</item>
+        <item>Legumbre</item>
+        <item>Lacteo</item>
+        <item>Cereal</item>
+        <item>Refresco</item>
+        </string-array>
+
+    <!--- Elementos para el spinner de selección de cada alimento -->
+    <string-array name="spinerArroz">
+        <item>Arroz blanco</item>
+        <item>Arroz instantaneo</item>
+        <item>Arroz integral</item>
+    </string-array>
+    <string-array name="spinerFruta">
+        <item>Fresas</item>
+        <item>Platano</item>
+        <item>Melocoton</item>
+        <item>Manzana</item>
+        <item>Naranja</item>
+        <item>Kiwi</item>
+        <item>Piña</item>
+    </string-array>
+    <string-array name="spinerLegumbre">
+        <item>Garbanzos</item>
+        <item>Judias</item>
+        <item>Lentejas</item>
+    </string-array>
+    <string-array name="spinerLacteo">
+        <item>Helado</item>
+        <item>Leche entera</item>
+        <item>Yogur</item>
+    </string-array>
+    <string-array name="spinerCereal">
+        <item>Cereales all-bran</item>
+        <item>Cereales cornflakes</item>
+        <item>Cereales muesli</item>
+    </string-array>
+    <string-array name="spinerRefresco">
+        <item>Bebida cola</item>
+        <item>Zumo de naranja</item>
+        <item>Zumo de piña</item>
+    </string-array>
+
+    <!--- Elementos para rellenar la tabla de alimentos en la base de datos -->
+    <string-array name="arrayTipoAlimento">
+        <item>Arroz</item>
+        <item>Arroz</item>
+        <item>Arroz</item>
+        <item>Fruta</item>
+        <item>Fruta</item>
+        <item>Fruta</item>
+        <item>Fruta</item>
+        <item>Fruta</item>
+        <item>Fruta</item>
+        <item>Fruta</item>
+        <item>Legumbre</item>
+        <item>Legumbre</item>
+        <item>Legumbre</item>
+        <item>Lacteo</item>
+        <item>Lacteo</item>
+        <item>Lacteo</item>
+        <item>Cereal</item>
+        <item>Cereal</item>
+        <item>Cereal</item>
+        <item>Refresco</item>
+        <item>Refresco</item>
+        <item>Refresco</item>
+    </string-array>
+
+    <!--- Elementos para rellenar la tabla de alimentos en la base de datos -->
+    <string-array name="arrayAlimentos">
+        <item>Arroz blanco</item>
+        <item>Arroz instantaneo</item>
+        <item>Arroz integral</item>
+        <item>Fresas</item>
+        <item>Platano</item>
+        <item>Melocoton</item>
+        <item>Manzana</item>
+        <item>Naranja</item>
+        <item>Kiwi</item>
+        <item>Piña</item>
+        <item>Garbanzos</item>
+        <item>Judias</item>
+        <item>Lentejas</item>
+        <item>Helado</item>
+        <item>Leche entera</item>
+        <item>Yogur</item>
+        <item>Cereales all-bran</item>
+        <item>Cereales cornflakes</item>
+        <item>Cereales muesli</item>
+        <item>Bebida cola</item>
+        <item>Zumo de naranja</item>
+        <item>Zumo de piña</item>
+    </string-array>
+
+</resources>

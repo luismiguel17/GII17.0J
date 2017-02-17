@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mario.gii_14b" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.tfg_gii14b.mario.interfaz.Perfil"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.tfg_gii14b.mario.interfaz.MenuPrincipal"
+            android:label="Menú principal"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.tfg_gii14b.mario.interfaz.RegistroGlucemias"
+            android:label="Registro de glucemias"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.tfg_gii14b.mario.interfaz.MenuPrincipal" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tfg_gii14b.mario.interfaz.MenuPrincipal" />
+        </activity>
+        <activity
+            android:name="com.tfg_gii14b.mario.interfaz.ActividadFisica"
+            android:label="Actividad física"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.tfg_gii14b.mario.interfaz.RegistroGlucemias" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tfg_gii14b.mario.interfaz.RegistroGlucemias" />
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.tfg_gii14b.mario.interfaz.Carbohidratos"
+            android:label="Recuento de carbohidratos"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.tfg_gii14b.mario.interfaz.ActividadFisica" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tfg_gii14b.mario.interfaz.ActividadFisica" />
+        </activity>
+        <activity
+            android:name="com.tfg_gii14b.mario.interfaz.Incidencias"
+            android:label="@string/title_activity_incidencias"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.tfg_gii14b.mario.interfaz.RegistroGlucemias" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tfg_gii14b.mario.interfaz.RegistroGlucemias" />
+        </activity>
+        <activity android:name="com.tfg_gii14b.mario.interfaz.Launcher" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tfg_gii14b.mario.interfaz.Historial"
+            android:label="@string/title_activity_historial"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+    </application>
+
+</manifest>
