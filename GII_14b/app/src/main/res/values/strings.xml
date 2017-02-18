@@ -32,6 +32,18 @@
     <string name="minmax_incorrecto">Introduce valores min y max de glucemia entre los valores indicados</string>
     <string name="minmax_orden">El valor min de glucemia no puedes ser mayor que el valor máximo</string>
 
+    <string name="primeraEjecucion">primeraEjecucion</string>
+    <string name="nombre">nombre</string>
+    <string name="edad">edad</string>
+    <string name="estatura">estatura</string>
+    <string name="peso">peso</string>
+    <string name="min">min</string>
+    <string name="max">max</string>
+    <string name="udsBasal">udsBasal"</string>
+    <string name="udsRapida">udsRapida</string>
+    <string name="rapida">rapida</string>
+    <string name="ultrarrapida">ultrarrapida</string>
+
     <!--- Strings de Menu principal -->
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_menu_principal">MenuPrincipal</string>
@@ -79,7 +91,7 @@
     <string name="bolo">Bolo corrector</string>
     <string name="title_activity_carbohidratos">Carbohidratos</string>
     <string name="tv_carbohidratos">Selecciona el alimento de la ingesta</string>
-    <string name="tv_valorcarbo">Introuce el número de raciones del alimento</string>
+    <string name="tv_valorgramos">Introuce el número de gramos del alimento</string>
     <string name="bt_finalizar">Finalizar</string>
     <string name="aceptar">Aceptar</string>
 

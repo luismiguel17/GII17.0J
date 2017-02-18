@@ -53,16 +53,16 @@ public class Perfil extends AppCompatActivity {
         RadioButton rapidaCheck = (RadioButton) findViewById(R.id.rb_rapida);
         RadioButton ultrarrapidaCheck = (RadioButton) findViewById(R.id.rb_ultrarrapida);
 
-        nombreEt.setText(misPreferencias.getString("nombre", ""));
-        edadEt.setText(misPreferencias.getString("edad", ""));
-        estaturaEt.setText(misPreferencias.getString("estatura", ""));
-        pesoEt.setText(misPreferencias.getString("peso", ""));
-        minEt.setText(misPreferencias.getString("min", ""));
-        maxEt.setText(misPreferencias.getString("max", ""));
-        uds1Et.setText(misPreferencias.getString("udsBasal", ""));
-        uds2Et.setText(misPreferencias.getString("udsRapida", ""));
-        rapidaCheck.setChecked(misPreferencias.getBoolean("rapida", false));
-        ultrarrapidaCheck.setChecked(misPreferencias.getBoolean("ultrarrapida", false));
+        nombreEt.setText(misPreferencias.getString(getString(R.string.nombre), ""));
+        edadEt.setText(misPreferencias.getString(getString(R.string.edad), ""));
+        estaturaEt.setText(misPreferencias.getString(getString(R.string.estatura), ""));
+        pesoEt.setText(misPreferencias.getString(getString(R.string.peso), ""));
+        minEt.setText(misPreferencias.getString(getString(R.string.min), ""));
+        maxEt.setText(misPreferencias.getString(getString(R.string.max), ""));
+        uds1Et.setText(misPreferencias.getString(getString(R.string.udsBasal), ""));
+        uds2Et.setText(misPreferencias.getString(getString(R.string.udsRapida), ""));
+        rapidaCheck.setChecked(misPreferencias.getBoolean(getString(R.string.rapida), false));
+        ultrarrapidaCheck.setChecked(misPreferencias.getBoolean(getString(R.string.ultrarrapida), false));
 
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "Preferences loaded with previous values (if exist).");
@@ -112,16 +112,16 @@ public class Perfil extends AppCompatActivity {
             Toast.makeText(Perfil.this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
         } else {
             editorPreferencias.putBoolean("primeraEjecucion", true);
-            editorPreferencias.putString("nombre", nombre);
-            editorPreferencias.putString("edad", edad);
-            editorPreferencias.putString("estatura", estatura);
-            editorPreferencias.putString("peso", peso);
-            editorPreferencias.putString("min", min);
-            editorPreferencias.putString("max", max);
-            editorPreferencias.putString("udsBasal", udsBasal);
-            editorPreferencias.putString("udsRapida", udsRapida);
-            editorPreferencias.putBoolean("rapida", rapida);
-            editorPreferencias.putBoolean("ultrarrapida", ultrarrapida);
+            editorPreferencias.putString(getString(R.string.nombre), nombre);
+            editorPreferencias.putString(getString(R.string.edad), edad);
+            editorPreferencias.putString(getString(R.string.estatura), estatura);
+            editorPreferencias.putString(getString(R.string.estatura), peso);
+            editorPreferencias.putString(getString(R.string.min), min);
+            editorPreferencias.putString(getString(R.string.max), max);
+            editorPreferencias.putString(getString(R.string.udsBasal), udsBasal);
+            editorPreferencias.putString(getString(R.string.udsRapida), udsRapida);
+            editorPreferencias.putBoolean(getString(R.string.rapida), rapida);
+            editorPreferencias.putBoolean(getString(R.string.ultrarrapida), ultrarrapida);
 
             editorPreferencias.apply(); // changed a commy by apply by recommendation of IntelliJ
 

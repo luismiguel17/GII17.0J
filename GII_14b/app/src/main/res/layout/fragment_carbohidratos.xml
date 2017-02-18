@@ -41,8 +41,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_valorcarbo"
-        android:id="@+id/tv_valorcarbo"
+        android:text="@string/tv_valorgramos"
+        android:id="@+id/tv_valorgramos"
         android:layout_below="@+id/spiner_tipo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -53,8 +53,8 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/et_carbo"
-        android:layout_below="@+id/tv_valorcarbo"
+        android:id="@+id/et_gramos"
+        android:layout_below="@+id/tv_valorgramos"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -65,11 +65,11 @@
         android:background="#00c4eb"
         android:textColor="#ffffff"
         android:onClick="finalizarOnClick"
-        android:layout_below="@+id/et_carbo"
-        android:layout_alignRight="@+id/tv_valorcarbo"
+        android:layout_below="@+id/et_gramos"
+        android:layout_alignRight="@+id/tv_valorgramos"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
-        android:layout_alignEnd="@+id/tv_valorcarbo" />
+        android:layout_alignEnd="@+id/tv_valorgramos" />
 
     <Button
         android:layout_width="wrap_content"
@@ -80,11 +80,11 @@
         android:textColor="#ffffff"
         android:onClick="añadirOtroOnClick"
         android:nestedScrollingEnabled="true"
-        android:layout_below="@+id/et_carbo"
-        android:layout_alignLeft="@+id/tv_valorcarbo"
+        android:layout_below="@+id/et_gramos"
+        android:layout_alignLeft="@+id/tv_valorgramos"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
-        android:layout_alignStart="@+id/tv_valorcarbo" />
+        android:layout_alignStart="@+id/tv_valorgramos" />
 
 </RelativeLayout>
 </ScrollView>
