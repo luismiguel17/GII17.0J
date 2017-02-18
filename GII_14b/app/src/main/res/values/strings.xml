@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UBUDiabetes</string>
+    <string name="app_name">UBUDiabetes 1.1</string>
     <string name="action_settings">Ajustes de perfil</string>
     <string name="action_acerca">Acerca de...</string>
     <string name="action_idioma">Idioma</string>
@@ -15,22 +15,22 @@
     <string name="tvedad">Edad</string>
     <string name="h_nombre">Introduce aquí tu nombre</string>
     <string name="h_edad">Introduce aquí tu edad</string>
-    <string name="tvestatura">Estatura</string>
-    <string name="tvpeso">Peso</string>
+    <string name="tvestatura">Estatura (cm)</string>
+    <string name="tvpeso">Peso (kg)</string>
     <string name="hestatura">Introduce tu estatura en cm</string>
     <string name="hpeso">Introduce tu peso en kg</string>
-    <string name="tvmaxmin">Introduce los valores de glucemia deseados (entre 80 y 250)</string>
-    <string name="h_min">mín.</string>
-    <string name="h_max">máx.</string>
-    <string name="tvinsulina">Insulina Basal</string>
-    <string name="cb_determir">Determir</string>
-    <string name="cb_glargina">Glargina</string>
-    <string name="tv_mañana">Mañana</string>
-    <string name="tv_noche">Noche</string>
-    <string name="tv_uds">Unidades de insulina basal diarias</string>
+    <string name="tvmaxmin">Introduce los valores de glucemia deseados entre 80 y 250 mg/dl</string>
+    <string name="h_min">mín.(mg/dl)</string>
+    <string name="h_max">máx.(mg/dl)</string>
+    <string name="tvinsulina">Insulina del bolo</string>
+    <string name="cb_rapida">Rápida</string>
+    <string name="cb_ultrarrapida">Ultrarrápida</string>
+    <string name="tv_insulina_basal">Basal</string>
+    <string name="tv_insulina_rapida">Rápida</string>
+    <string name="tv_uds">Unidades de insulina</string>
     <string name="bt_guardar">Guardar</string>
     <string name="minmax_incorrecto">Introduce valores min y max de glucemia entre los valores indicados</string>
-    <string name="minmax_orden">El valor min de glucemia no puedes ser mayor que el valor maximo</string>
+    <string name="minmax_orden">El valor min de glucemia no puedes ser mayor que el valor máximo</string>
 
     <!--- Strings de Menu principal -->
     <string name="title_activity_main">MainActivity</string>

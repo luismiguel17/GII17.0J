@@ -195,7 +195,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_mañana"
+            android:text="@string/tv_insulina_basal"
             android:id="@+id/textView4"
             android:textColor="#ffffff" />
 
@@ -204,7 +204,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/et_uds1"
+            android:id="@+id/et_udsBasal"
             android:layout_weight="1"
             android:background="#ffffff"
             android:layout_marginRight="10dp"
@@ -213,7 +213,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_noche"
+            android:text="@string/tv_insulina_rapida"
             android:id="@+id/textView5"
             android:textColor="#ffffff" />
 
@@ -222,7 +222,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/et_uds2"
+            android:id="@+id/et_udsRapida"
             android:layout_weight="1"
             android:background="#ffffff"
             android:layout_marginLeft="10dp" />
@@ -253,15 +253,15 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Glargina"
-            android:id="@+id/rd_Glargina"
+            android:text="Rápida"
+            android:id="@+id/rb_rapida"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Determir"
-            android:id="@+id/rd_determir"
+            android:text="Ultrarrápida"
+            android:id="@+id/rb_ultrarrapida"
             android:layout_gravity="right"
             android:checked="false" />
     </RadioGroup>
