@@ -12,9 +12,10 @@ import com.example.mario.gii_14b.R;
 public class CalculaBolo extends AppCompatActivity {
 
     private static final int valorObjetivo = 100;
-    private int ultimaMedicion,insulinaBasal,raciones;
+    private int ultimaMedicion,insulinaBasal;
+    private double raciones;
 
-    public CalculaBolo(int ultimaMedicion, int insulinaTotal, int sumatorio){
+    public CalculaBolo(int ultimaMedicion, int insulinaTotal, double sumatorio){
         this.ultimaMedicion=ultimaMedicion;
         this.insulinaBasal=insulinaTotal;
         this.raciones=sumatorio;

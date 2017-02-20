@@ -8,12 +8,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.mario.gii_14b.BuildConfig;
 import com.tfg_gii14b.mario.calculos.CalculaBolo;
 import com.example.mario.gii_14b.R;
 import com.tfg_gii14b.mario.persistencia.DataBaseManager;
@@ -28,17 +30,43 @@ import java.util.ArrayList;
  */
 
 public class Carbohidratos extends AppCompatActivity {
+    /**
+     * Gramos de hidratos de carbono (HC).
+     * 10 Gramos de HC = 1 RACIÓN DE HC.
+     * Tomado de la tabla de raciones de hidratos de carbono
+     * Ver: http://www.fundaciondiabetes.org/upload/publicaciones_ficheros/71/TABLAHC.pdf.
+     */
+    private static final double GRAMOS_DE_HC = 10.0;
+    /**
+     * Tag for log.
+     */
+    private static String TAG = Carbohidratos.class.getName();
+
+    /**
+     * Posición en la tabla de alimentos donde se almacenan los gramos por ración del alimento.
+     */
+    public static final int COLUMNA_RACION = 2;
+
     private Spinner listaComida, listaTipo;
     private final int RESULT_EXIT = 0;
     private static final String INTENSIDAD_ALTA = "Larga (más de 2 horas)";
     private static final String INTENSIDAD_MEDIA = "Media (de 60 a 90 minutos)";
     private static final String INTENSIDAD_IRREGULAR = "Irregular e intermitente";
     private String comida;
-    private int sumatorioRaciones;
+    private double sumatorioRaciones;
     private String[] tipoAlimento;
+    private String[] numeroTipoAlimento;
     private String[] alimento;
-    public static final int[] raciones = {150, 150, 150, 120, 120, 120, 120, 120, 120, 120, 150, 150, 150, 50, 250, 200, 30, 30, 30, 250, 250, 250};
-    public static final int[] cargas = {14, 16, 19, 1, 12, 4, 4, 5, 5, 7, 3, 3, 3, 8, 3, 3, 4, 18, 10, 14, 13, 13};
+    public static final int[] raciones =
+            {200, 50, 50, 50, 100, // Lacteos
+                    13, 38, 13, 40, 12, 13, // Cereales
+                    150, 100, 30, 25, 100, // Frutas
+                    300, 40, 300, 300, 500, // Hortalizas
+                    250, 15, 150, 140, 150, // Fruta grasa y seca
+                    130, 100, 0, 100, 250, // Bebidas,
+                    10, 10, 20, 20, 20 // Otros
+            };
+;
 
 
     ArrayList<String> arrayAlimentos = new ArrayList<String>();
@@ -66,12 +94,14 @@ public class Carbohidratos extends AppCompatActivity {
 
         //Generamos los adaptadores para todos los posibles spinners
         final ArrayAdapter adpTipoAlimento = ArrayAdapter.createFromResource(this, R.array.spinerTipoAlimento, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpArroz = ArrayAdapter.createFromResource(this, R.array.spinerArroz, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpFruta = ArrayAdapter.createFromResource(this, R.array.spinerFruta, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpLegumbre = ArrayAdapter.createFromResource(this, R.array.spinerLegumbre, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpLacteo = ArrayAdapter.createFromResource(this, R.array.spinerLacteo, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpCereal = ArrayAdapter.createFromResource(this, R.array.spinerCereal, android.R.layout.simple_spinner_item);
-        final ArrayAdapter adpRefresco = ArrayAdapter.createFromResource(this, R.array.spinerRefresco, android.R.layout.simple_spinner_item);
+
+        final ArrayAdapter adpLacteo = ArrayAdapter.createFromResource(this, R.array.spinerLacteos, android.R.layout.simple_spinner_item);
+        final ArrayAdapter adpArroz = ArrayAdapter.createFromResource(this, R.array.spinerCereales, android.R.layout.simple_spinner_item);
+        final ArrayAdapter adpFruta = ArrayAdapter.createFromResource(this, R.array.spinnerFrutas, android.R.layout.simple_spinner_item);
+        final ArrayAdapter adpHortaliza = ArrayAdapter.createFromResource(this, R.array.spinnerHortalizas, android.R.layout.simple_spinner_item);
+        final ArrayAdapter adpFrutaGrasaSeca = ArrayAdapter.createFromResource(this, R.array.spinnerFrutaGrasaSeca, android.R.layout.simple_spinner_item);
+        final ArrayAdapter adpBebida = ArrayAdapter.createFromResource(this, R.array.spinerBebidas, android.R.layout.simple_spinner_item);
+        final ArrayAdapter adpOtros = ArrayAdapter.createFromResource(this, R.array.spinerOtros, android.R.layout.simple_spinner_item);
 
         listaComida = (Spinner) findViewById(R.id.sp_comidas);
         listaComida.setAdapter(adpTipoAlimento);
@@ -81,17 +111,19 @@ public class Carbohidratos extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    listaTipo.setAdapter(adpArroz);
-                } else if (position == 1) {
-                    listaTipo.setAdapter(adpFruta);
-                } else if (position == 2) {
-                    listaTipo.setAdapter(adpLegumbre);
-                } else if (position == 3) {
                     listaTipo.setAdapter(adpLacteo);
+                } else if (position == 1) {
+                    listaTipo.setAdapter(adpArroz);
+                } else if (position == 2) {
+                    listaTipo.setAdapter(adpFruta);
+                } else if (position == 3) {
+                    listaTipo.setAdapter(adpHortaliza);
                 } else if (position == 4) {
-                    listaTipo.setAdapter(adpCereal);
+                    listaTipo.setAdapter(adpFrutaGrasaSeca);
                 } else if (position == 5) {
-                    listaTipo.setAdapter(adpRefresco);
+                    listaTipo.setAdapter(adpBebida);
+                } else if (position == 6) {
+                    listaTipo.setAdapter((adpOtros));
                 }
             }
 
@@ -121,16 +153,35 @@ public class Carbohidratos extends AppCompatActivity {
      */
     public void rellenarTablaAlimentos() {
         tipoAlimento = getResources().getStringArray(R.array.arrayTipoAlimento);
+        numeroTipoAlimento = getResources().getStringArray(R.array.numeroTipoAlimento);
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "Tipos de alimentos: " + tipoAlimento.length);
+            Log.d(TAG, "Numero de elementos de tipos de alimentos: " + numeroTipoAlimento.length);
+        }
+
+
         alimento = getResources().getStringArray(R.array.arrayAlimentos);
 
         DataBaseManager dbmanager = new DataBaseManager(this);
+        ContentValues values = new ContentValues();
+        int contadorNumeroTipoAlimento = 0;
+        int acumulado = Integer.parseInt(numeroTipoAlimento[contadorNumeroTipoAlimento]);
+
         for (int i = 0; i < alimento.length; ++i) {
-            ContentValues values = new ContentValues();
-            values.put("tipoAlimento", tipoAlimento[i]);
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Procesando tipo de alimento: " + tipoAlimento[contadorNumeroTipoAlimento] +
+                        " Alimento: " + alimento[i]);
+            }
+            values.put("tipoAlimento", tipoAlimento[contadorNumeroTipoAlimento]);
             values.put("alimento", alimento[i]);
             values.put("racion", raciones[i]);
-            values.put("carga", cargas[i]);
             dbmanager.insertar("alimentos", values);
+            values.clear();
+            // si hemos procesado todos los alimentos de un cierto y no hay más tipos de alimentos a procesar
+            if (i == acumulado - 1 && contadorNumeroTipoAlimento < tipoAlimento.length - 1) {
+                contadorNumeroTipoAlimento++; // avanzamos al siguiente tipo de alimento
+                acumulado += Integer.parseInt(numeroTipoAlimento[contadorNumeroTipoAlimento]);
+            }
         }
     }
 
@@ -143,20 +194,24 @@ public class Carbohidratos extends AppCompatActivity {
     public void añadirOtroOnClick(View view) {
         EditText gramosEt = (EditText) findViewById(R.id.et_gramos);
         String gramos = gramosEt.getText().toString();
-        int nracion = 0;
+        int numeroGramos = 0;
         if (!gramos.equals("")) {
-            nracion = Integer.parseInt(gramos);
+            numeroGramos = Integer.parseInt(gramos);
         }
         gramosEt.setText("0");
 
         DataBaseManager dbmanager = new DataBaseManager(this);
-        final Cursor cursorGlucemias = dbmanager.selectAlimento(comida);
-        if (cursorGlucemias.moveToFirst()) {
-            String n = cursorGlucemias.getString(3);
-            sumatorioRaciones += Integer.parseInt(n) * nracion;
+        final Cursor cursorAlimentos = dbmanager.selectAlimento(comida);
+        if (cursorAlimentos.moveToFirst()) {
+            String gramosPorRacion = cursorAlimentos.getString(COLUMNA_RACION);
+            // RMS: Cambiamos el cálculo de la formula en la versión 1.1
+            //sumatorioRaciones += Integer.parseInt(n) * nracion; // Versión 1.0
+            sumatorioRaciones += (numeroGramos * GRAMOS_DE_HC) / Double.parseDouble(gramosPorRacion);
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Grams per ration: " + gramosPorRacion + " Grams: " + numeroGramos);
+                Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
+            }
         }
-
-
     }
 
     /**

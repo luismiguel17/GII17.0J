@@ -36,8 +36,7 @@ public class DataBaseManager {
     public static final String CREATE_ALIMENTOS = "create table alimentos("
             +"tipoAlimento text not null,"
             +"alimento text primary key,"
-            +"racion int not null,"
-            +"carga int not null);";
+            +"racion int not null);";
 
     /**
      * Función que inserta una entrada en una determinada tabla
