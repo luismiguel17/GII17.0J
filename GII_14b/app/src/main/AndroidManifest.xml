@@ -48,10 +48,10 @@
             android:label="Recuento de carbohidratos"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.tfg_gii14b.mario.interfaz.ActividadFisica" >
+            android:parentActivityName="com.tfg_gii14b.mario.interfaz.RegistroGlucemias" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.tfg_gii14b.mario.interfaz.ActividadFisica" />
+                android:value="com.tfg_gii14b.mario.interfaz.RegistroGlucemias" />
         </activity>
         <activity
             android:name="com.tfg_gii14b.mario.interfaz.Incidencias"

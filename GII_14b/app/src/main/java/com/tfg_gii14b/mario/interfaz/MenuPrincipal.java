@@ -34,7 +34,7 @@ public class MenuPrincipal extends AppCompatActivity {
         String[] opciones = {getString(R.string.main_registro),getString(R.string.main_historial)};
 
         ListView listaMenu = (ListView) findViewById(R.id.lv_opciones);
-        ArrayAdapter<String> adaptlv = new ArrayAdapter<String>(getApplicationContext(),R.layout.list_black_text,opciones);
+        ArrayAdapter<String> adaptlv = new ArrayAdapter<>(getApplicationContext(),R.layout.list_black_text,opciones);
         listaMenu.setAdapter(adaptlv);
         ListViewUtility.setListViewHeightBasedOnChildren(listaMenu);
 
@@ -45,7 +45,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
                     SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
                     editorPreferencias.putBoolean("boloCorrector",false);
-                    editorPreferencias.commit();
+                    editorPreferencias.apply();
                     Intent i = new Intent(getApplicationContext(), RegistroGlucemias.class);
                     startActivity(i);
                 }else if(position == 1){
@@ -82,7 +82,7 @@ public class MenuPrincipal extends AppCompatActivity {
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
         editorPreferencias.putBoolean("boloCorrector",true);
-        editorPreferencias.commit();
+        editorPreferencias.apply();
 
         Intent paso1 = new Intent(this, RegistroGlucemias.class);
         startActivity(paso1);

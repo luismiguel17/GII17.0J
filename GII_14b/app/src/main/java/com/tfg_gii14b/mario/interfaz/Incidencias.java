@@ -29,8 +29,6 @@ public class Incidencias extends AppCompatActivity {
     final private int RESULT_EXIT=0;
     private String incidencia;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +58,7 @@ public class Incidencias extends AppCompatActivity {
         listaIncidencias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String opcion = adapter.getItem(position).toString();
-                incidencia = opcion;
+               incidencia = adapter.getItem(position).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -80,7 +77,7 @@ public class Incidencias extends AppCompatActivity {
 
             Bundle bundle = getIntent().getExtras();
             Long id = bundle.getLong("id");
-            Integer idGlucemia = Integer.valueOf(id.intValue());
+            Integer idGlucemia = id.intValue();
 
             DataBaseManager dbmanager = new DataBaseManager(this);
 

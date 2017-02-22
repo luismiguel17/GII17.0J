@@ -1,6 +1,6 @@
 package com.tfg_gii14b.mario.calculos;
 
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 
 import com.tfg_gii14b.mario.persistencia.ValoresPOJO;
 
@@ -10,12 +10,7 @@ import com.tfg_gii14b.mario.persistencia.ValoresPOJO;
  * @author: Mario López Jiménez
  * @version: 1.0
  */
-public class CalculaBolo extends AppCompatActivity {
-    /**
-     * Tag for log.
-     */
-    private static String TAG = CalculaBolo.class.getName();
-
+public class CalculaBolo { // extends AppCompatActivity {
 
     /**
      * Gramos de hidratos de carbono.
@@ -73,7 +68,7 @@ public class CalculaBolo extends AppCompatActivity {
      */
     public double calculoBoloCorrector() {
         double operando1 = gramosHidratosCarbono / calculaRatio();
-        double operando2 = (valores.getGlucemiaMinima() - calculaGlucemiaObjetivo()) / calculaFactorSensibilidad();
+        double operando2 = (valores.getGlucemia() - calculaGlucemiaObjetivo()) / calculaFactorSensibilidad();
         return operando1 + operando2;
     }
 }

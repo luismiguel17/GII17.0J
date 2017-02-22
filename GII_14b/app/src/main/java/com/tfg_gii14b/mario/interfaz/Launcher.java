@@ -22,7 +22,7 @@ public class Launcher extends AppCompatActivity {
         Intent perfil = new Intent(this, Perfil.class);
         Intent menuPrincipal = new Intent(this, MenuPrincipal.class);
 
-        if(arranque==false){
+        if(!arranque){
             startActivity(menuPrincipal);
             startActivity(perfil);
 

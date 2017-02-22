@@ -50,9 +50,11 @@ public class Carbohidratos extends AppCompatActivity {
 
     private Spinner listaComida, listaTipo;
     private final int RESULT_EXIT = 0;
+    /*
     private static final String INTENSIDAD_ALTA = "Larga (más de 2 horas)";
     private static final String INTENSIDAD_MEDIA = "Media (de 60 a 90 minutos)";
     private static final String INTENSIDAD_IRREGULAR = "Irregular e intermitente";
+    */
     private String comida;
     private double sumatorioRaciones;
     private String[] tipoAlimento;
@@ -130,11 +132,11 @@ public class Carbohidratos extends AppCompatActivity {
                     25, 0, 120, 25, 25,         // 11
                     0, 15                       // 12
             };
-    ;
 
 
-    ArrayList<String> arrayAlimentos = new ArrayList<String>();
-    ArrayList<Integer> arrayRaciones = new ArrayList<Integer>();
+
+    ArrayList<String> arrayAlimentos = new ArrayList<>();
+    ArrayList<Integer> arrayRaciones = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +152,7 @@ public class Carbohidratos extends AppCompatActivity {
         SharedPreferences.Editor editor = misPreferencias.edit();
 
         // Si la tabla de alimentos no estaba creada... se crea
-        if (misPreferencias.getBoolean("tablaAlimentos", false) == false) {
+        if (!misPreferencias.getBoolean("tablaAlimentos", false)) {
             rellenarTablaAlimentos();
             editor.putBoolean("tablaAlimentos", true);
             editor.apply();
@@ -313,19 +315,21 @@ public class Carbohidratos extends AppCompatActivity {
         double insulinaRapida = Double.parseDouble(misPreferencias.getString(getString(R.string.udsRapida), "0"));
         double glucemiaMinima = Double.parseDouble(misPreferencias.getString(getString(R.string.min), "0"));
         double glucemiaMaxima = Double.parseDouble(misPreferencias.getString(getString(R.string.max), "0"));
-        ValoresPOJO valoresPOJO = new ValoresPOJO(rapida, insulinaBasal, insulinaRapida, glucemiaMinima, glucemiaMaxima);
+        double glucemia = misPreferencias.getInt(getString(R.string.glucemia), 0);
+        ValoresPOJO valoresPOJO = new ValoresPOJO(rapida, insulinaBasal, insulinaRapida, glucemiaMinima, glucemiaMaxima, glucemia);
 
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
+            Log.d(TAG, "Current glucemia: " + glucemia + " Current count of carbohidrates (HC): " + sumatorioRaciones);
         }
 
         CalculaBolo cb = new CalculaBolo(valoresPOJO, sumatorioRaciones);
 
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "Bolo calculado: " + cb);
-        }
 
         double boloResult = cb.calculoBoloCorrector();
+
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "Bolo calculado: " + boloResult);
+        }
         //String comentarioFinal = generaComentarioBolo(tipoEjer, boloResult);
         String comentarioFinal = generaComentarioBolo(boloResult);
 
@@ -352,7 +356,7 @@ public class Carbohidratos extends AppCompatActivity {
      * @param bolo resultado del calculo del bolo corrector
      */
     private String generaComentarioBolo(double bolo) {
-        String comentario = getString(R.string.resultado_bolo) + String.format("%.2f", bolo);
+        String comentario = getString(R.string.resultado_bolo) + String.format(" %.2f", bolo);
         if (bolo < 0) {
             comentario += "\n" + getString(R.string.ingerir_carbohidratos);
         }

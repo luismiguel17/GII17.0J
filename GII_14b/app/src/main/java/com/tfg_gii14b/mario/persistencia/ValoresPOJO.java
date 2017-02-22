@@ -1,7 +1,5 @@
 package com.tfg_gii14b.mario.persistencia;
 
-import com.example.mario.gii_14b.R;
-
 /**
  * POJO para pasar los datos de preferencias.
  */
@@ -16,13 +14,30 @@ public class ValoresPOJO {
      * @param insulinaRapida
      * @param glucemiaMinima
      * @param glucemiaMaxima
+     * @param glucemia       glucemia inicial
      */
-    public ValoresPOJO(boolean rapida, double insulinaBasal, double insulinaRapida, double glucemiaMinima, double glucemiaMaxima) {
+    public ValoresPOJO(boolean rapida, double insulinaBasal, double insulinaRapida,
+                       double glucemiaMinima, double glucemiaMaxima, double glucemia) {
         this.rapida = rapida;
         this.insulinaBasal = insulinaBasal;
         this.insulinaRapida = insulinaRapida;
         this.glucemiaMinima = glucemiaMinima;
         this.glucemiaMaxima = glucemiaMaxima;
+        this.glucemia = glucemia;
+    }
+
+    /**
+     * Glucemia actual.
+     */
+    private double glucemia;
+
+    /**
+     * Obtien la lectura actual de glucemia.
+     *
+     * @return glucemia actual
+     */
+    public double getGlucemia() {
+        return glucemia;
     }
 
     /**
@@ -30,7 +45,8 @@ public class ValoresPOJO {
      */
     private boolean rapida;
 
-    /** Obtiene si se usa o no insulina rápida.
+    /**
+     * Obtiene si se usa o no insulina rápida.
      *
      * @return true si usa insulina rapida o no
      */

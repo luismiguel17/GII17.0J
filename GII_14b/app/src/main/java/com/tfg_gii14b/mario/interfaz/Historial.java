@@ -61,12 +61,12 @@ public class Historial extends AppCompatActivity implements OnChartValueSelected
 
     public void inicializeChart(){
         //Generamos los entries con los valores de la última semana para cada periodo
-        entriesDesayuno = new ArrayList<Entry>(generarCursores(generaFechas(),getString(R.string.leyenda_desayuno)));
-        entriesComida = new ArrayList<Entry>(generarCursores(generaFechas(),getString(R.string.leyenda_comida)));
-        entriesCena = new ArrayList<Entry>(generarCursores(generaFechas(), getString(R.string.leyenda_cena)));
+        entriesDesayuno = new ArrayList<>(generarCursores(generaFechas(),getString(R.string.leyenda_desayuno)));
+        entriesComida = new ArrayList<>(generarCursores(generaFechas(),getString(R.string.leyenda_comida)));
+        entriesCena = new ArrayList<>(generarCursores(generaFechas(), getString(R.string.leyenda_cena)));
 
         //Array que contiene las etiquetas para el eje X
-        labels = new ArrayList<String>(generaFechas());
+        labels = new ArrayList<>(generaFechas());
 
         //Inicializamos los set de datos para cada periodo, incluyendo su leyenda
         LineData datasetline = new LineData(labels);
@@ -149,7 +149,7 @@ public class Historial extends AppCompatActivity implements OnChartValueSelected
      * @param periodo
      */
     public ArrayList<Entry> generarCursores(ArrayList<String> fechas, String periodo){
-        ArrayList<Entry> entries = new ArrayList<Entry>();
+        ArrayList<Entry> entries = new ArrayList<>();
         DataBaseManager dbmanager = new DataBaseManager(this);
         for(int i=0;i<7;i++){
             Cursor cursorDesayuno = dbmanager.selectGlucemia(fechas.get(i),periodo);
@@ -204,7 +204,7 @@ public class Historial extends AppCompatActivity implements OnChartValueSelected
      */
     public Date stringToDate(String fecha) {
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
-        Date fechaEnviar = null;
+        Date fechaEnviar;
         try {
             fechaEnviar = formatoDelTexto.parse(fecha);
             return fechaEnviar;

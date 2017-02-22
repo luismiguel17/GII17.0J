@@ -43,11 +43,12 @@
     <string name="udsRapida">udsRapida</string>
     <string name="rapida">rapida</string>
     <string name="ultrarrapida">ultrarrapida</string>
+    <string name="glucemia">glucemia</string>
 
     <!--- Strings de Menu principal -->
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_menu_principal">MenuPrincipal</string>
-    <string name="acerca_de">UBUDiabetes: Aplicación de control de la diabetes en dispositivos móviles. Universidad de Burgos. 2015.</string>
+    <string name="acerca_de">UBUDiabetes 1.1. Aplicación de control de la diabetes en dispositivos móviles. Realizada la versión 1.0 por Mario López Jimenez (febrero 2016). \n\nModificada por Raúl Marticorena Sánchez, en su versión 1.1 (febrero 2017).\n\nUniversidad de Burgos. 2017.</string>
     <string name="bt_bolo">Calcular bolo</string>
     <string name="main_registro">Registro de glucemias</string>
     <string name="main_historial">Historial de glucemias</string>
@@ -56,13 +57,6 @@
     <string name="title_activity_registro_glucemias">RegistroGlucemias</string>
     <string name="tv_glucemia">Introduce el valor de glucemia</string>
     <string name="h_vglucemia">Introduzca el valor de glucemia</string>
-
-    <!--- Strings de Actividad física -->
-    <string name="title_activity_actividad_fisica">ActividadFisica</string>
-    <string name="tv_tipoejer">Selecciona el tipo de ejercicio:</string>
-    <string name="tv_intensidad">Selecciona la intensidad del ejercicio:</string>
-    <string name="bt_siguiente">Siguiente</string>
-
 
     <!--- Strings de Incidencias -->
     <string name="title_activity_incidencias">Incidencias</string>

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,12 +28,15 @@ import java.util.Locale;
  * @author: Mario López Jiménez
  * @version: 1.0
  */
-
 public class RegistroGlucemias extends AppCompatActivity {
+    /**
+     * Tag for log.
+     */
+    private static String TAG = RegistroGlucemias.class.getName();
 
     private String periodo;
-    final private int REQUEST_EXIT = 0;
-    final private int REQUEST_EXIT_BOLO = 1;
+    private final int REQUEST_EXIT = 0;
+    private final int REQUEST_EXIT_BOLO = 1;
     private boolean bolo;
 
 
@@ -48,7 +52,7 @@ public class RegistroGlucemias extends AppCompatActivity {
         SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
         bolo = misPreferencias.getBoolean("boloCorrector", false);
         editorPreferencias.putBoolean("boloCorrector", false);
-        editorPreferencias.commit();
+        editorPreferencias.apply();
 
 
         Spinner listaPeriodos = (Spinner) findViewById(R.id.sp_glucemias);
@@ -61,8 +65,7 @@ public class RegistroGlucemias extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position >= 0) {
-                    String opcion = adapter.getItem(position).toString();
-                    periodo = opcion;
+                   periodo = adapter.getItem(position).toString();
                 }
             }
 
@@ -77,17 +80,15 @@ public class RegistroGlucemias extends AppCompatActivity {
     /**
      * Función que determina el comportamiento del boton guardar al ser pulsado.
      * La funcion toma el dato introducido por el usuario, lo guarda en la base de datos, y
-     * si es necesario lanza la activity Incidencias
-     * Si RegistroGlucemias se ha llamado desde calcularBoloOnClick() además lanza la
-     * activity ActividadFisica
+     * si es necesario lanza la activity Incidencias.
      *
      * @param view
      */
     public void guardarGlucemiaOnClick(View view) {
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
-        String maxtxt = misPreferencias.getString("max", "");
-        String mintxt = misPreferencias.getString("min", "");
+        String maxtxt = misPreferencias.getString(getString(R.string.max), "");
+        String mintxt = misPreferencias.getString(getString(R.string.min), "");
         Integer min = Integer.parseInt(mintxt);
         Integer max = Integer.parseInt(maxtxt);
         long insertar;
@@ -100,22 +101,20 @@ public class RegistroGlucemias extends AppCompatActivity {
 
         } else {
             Integer cantidadGlucemia = Integer.parseInt(valortxt);
-            editorPreferencias.putInt("glucemia", cantidadGlucemia);
-            editorPreferencias.commit();
+            editorPreferencias.putInt(getString(R.string.glucemia), cantidadGlucemia);
+            editorPreferencias.apply();
 
             DataBaseManager dbmanager = new DataBaseManager(this);
-            final Cursor cursorGlucemias = dbmanager.consultarGlucemias();
-
             insertar = dbmanager.insertar("glucemias", generarContentValues(periodo, cantidadGlucemia));
 
             if (insertar != -1) {
-                Toast.makeText(RegistroGlucemias.this, "Valor de glucemia guardado correctamente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistroGlucemias.this, "Valor de glucemia guardado correctamente.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(RegistroGlucemias.this, "Valor incorrecto, compruebe que ha introducido valores numéricos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistroGlucemias.this, "Valor incorrecto, compruebe que ha introducido valores numéricos.", Toast.LENGTH_SHORT).show();
             }
 
 
-            if (bolo == true) {
+            if (bolo) {
                 /*
                 Intent i= new Intent(this, ActividadFisica.class);
                 startActivityForResult(i, REQUEST_EXIT_BOLO);
@@ -123,6 +122,7 @@ public class RegistroGlucemias extends AppCompatActivity {
 
                 // Eliminamos el paso de actividad física y se salta directamente
                 // al cálcuto de carbohidratos para el cálculo del bolo
+                Log.d(TAG, "Lanzando la actividad de carbohidratos.");
                 Intent i = new Intent(this, Carbohidratos.class);
                 startActivityForResult(i, REQUEST_EXIT);
             }
@@ -135,10 +135,9 @@ public class RegistroGlucemias extends AppCompatActivity {
                 i.putExtra("valor", cantidadGlucemia);
                 i.putExtra("min", min);
                 i.putExtra("max", max);
+                Log.d(TAG, "Lanzando la actividad de incidencias.");
                 startActivityForResult(i, REQUEST_EXIT);
-            } else if (bolo == false) {
-                super.onBackPressed();
-            } else {
+            } else if (!bolo) {
                 super.onBackPressed();
             }
 
@@ -146,7 +145,7 @@ public class RegistroGlucemias extends AppCompatActivity {
     }
 
     /**
-     * Override de onActivityResult en el que definimos cuando debe finalizar la activity
+     * Override de onActivityResult en el que definimos cuando debe finalizar la activity.
      *
      * @param requestCode
      * @param resultCode
@@ -155,8 +154,11 @@ public class RegistroGlucemias extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (bolo == true) {
+        if (bolo) {
             if (requestCode == REQUEST_EXIT_BOLO) {
+                finish();
+            }
+            else if (requestCode == REQUEST_EXIT) {
                 finish();
             }
         } else if (requestCode == REQUEST_EXIT) {
