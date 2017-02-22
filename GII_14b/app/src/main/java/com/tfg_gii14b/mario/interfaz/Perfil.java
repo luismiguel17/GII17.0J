@@ -107,15 +107,15 @@ public class Perfil extends AppCompatActivity {
             Toast.makeText(Perfil.this, R.string.minmax_incorrecto, Toast.LENGTH_SHORT).show();
         } else if (minVal > maxVal) {
             Toast.makeText(Perfil.this, R.string.minmax_orden, Toast.LENGTH_SHORT).show();
-        } else if (nombre.equals("") || edad.equals("") || estatura.equals("") || peso.equals("") || max.equals("") || min.equals("") ||
-                udsBasal.equals("") || udsRapida.equals("")) {
+        } else if (nombre.length() == 0 || edad.length() == 0 || estatura.length() == 0 || peso.length() == 0 || max.length() == 0 || min.length() == 0 ||
+                udsBasal.length() == 0 || udsRapida.length() == 0) {
             Toast.makeText(Perfil.this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
         } else {
             editorPreferencias.putBoolean("primeraEjecucion", true);
             editorPreferencias.putString(getString(R.string.nombre), nombre);
             editorPreferencias.putString(getString(R.string.edad), edad);
             editorPreferencias.putString(getString(R.string.estatura), estatura);
-            editorPreferencias.putString(getString(R.string.estatura), peso);
+            editorPreferencias.putString(getString(R.string.peso), peso);
             editorPreferencias.putString(getString(R.string.min), min);
             editorPreferencias.putString(getString(R.string.max), max);
             editorPreferencias.putString(getString(R.string.udsBasal), udsBasal);

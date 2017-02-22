@@ -22,7 +22,8 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Esta clase gestiona los elementos para el registro de glucemias
+ * Esta clase gestiona los elementos para el registro de glucemias.
+ *
  * @author: Mario López Jiménez
  * @version: 1.0
  */
@@ -45,8 +46,8 @@ public class RegistroGlucemias extends AppCompatActivity {
 
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
-        bolo = misPreferencias.getBoolean("boloCorrector",false);
-        editorPreferencias.putBoolean("boloCorrector",false);
+        bolo = misPreferencias.getBoolean("boloCorrector", false);
+        editorPreferencias.putBoolean("boloCorrector", false);
         editorPreferencias.commit();
 
 
@@ -79,9 +80,10 @@ public class RegistroGlucemias extends AppCompatActivity {
      * si es necesario lanza la activity Incidencias
      * Si RegistroGlucemias se ha llamado desde calcularBoloOnClick() además lanza la
      * activity ActividadFisica
+     *
      * @param view
      */
-    public void guardarGlucemiaOnClick(View view){
+    public void guardarGlucemiaOnClick(View view) {
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
         String maxtxt = misPreferencias.getString("max", "");
@@ -90,13 +92,13 @@ public class RegistroGlucemias extends AppCompatActivity {
         Integer max = Integer.parseInt(maxtxt);
         long insertar;
 
-        EditText valor =  (EditText) findViewById(R.id.et_cantidadglucemia);
+        EditText valor = (EditText) findViewById(R.id.et_cantidadglucemia);
         String valortxt = valor.getText().toString();
 
-        if(valortxt.equals("")) {
+        if (valortxt.equals("")) {
             Toast.makeText(RegistroGlucemias.this, "Introduce un valor de glucemia", Toast.LENGTH_SHORT).show();
 
-        }else{
+        } else {
             Integer cantidadGlucemia = Integer.parseInt(valortxt);
             editorPreferencias.putInt("glucemia", cantidadGlucemia);
             editorPreferencias.commit();
@@ -106,27 +108,37 @@ public class RegistroGlucemias extends AppCompatActivity {
 
             insertar = dbmanager.insertar("glucemias", generarContentValues(periodo, cantidadGlucemia));
 
-            if(insertar!=-1){
+            if (insertar != -1) {
                 Toast.makeText(RegistroGlucemias.this, "Valor de glucemia guardado correctamente", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 Toast.makeText(RegistroGlucemias.this, "Valor incorrecto, compruebe que ha introducido valores numéricos", Toast.LENGTH_SHORT).show();
             }
 
-            if(bolo==true){
+
+            if (bolo == true) {
+                /*
                 Intent i= new Intent(this, ActividadFisica.class);
                 startActivityForResult(i, REQUEST_EXIT_BOLO);
+                */
 
+                // Eliminamos el paso de actividad física y se salta directamente
+                // al cálcuto de carbohidratos para el cálculo del bolo
+                Intent i = new Intent(this, Carbohidratos.class);
+                startActivityForResult(i, REQUEST_EXIT);
             }
+
 
             if (cantidadGlucemia < min || cantidadGlucemia > max) {
                 Intent i = new Intent(this, Incidencias.class);
                 i.putExtra("id", insertar);
                 i.putExtra("periodo", periodo);
-                i.putExtra("valor",cantidadGlucemia);
-                i.putExtra("min",min);
+                i.putExtra("valor", cantidadGlucemia);
+                i.putExtra("min", min);
                 i.putExtra("max", max);
-                startActivityForResult(i,REQUEST_EXIT);
-            }else if(bolo==false){
+                startActivityForResult(i, REQUEST_EXIT);
+            } else if (bolo == false) {
+                super.onBackPressed();
+            } else {
                 super.onBackPressed();
             }
 
@@ -135,6 +147,7 @@ public class RegistroGlucemias extends AppCompatActivity {
 
     /**
      * Override de onActivityResult en el que definimos cuando debe finalizar la activity
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -142,27 +155,27 @@ public class RegistroGlucemias extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(bolo==true){
-            if(requestCode==REQUEST_EXIT_BOLO){
+        if (bolo == true) {
+            if (requestCode == REQUEST_EXIT_BOLO) {
                 finish();
             }
-        }else if(requestCode == REQUEST_EXIT)
-        {
+        } else if (requestCode == REQUEST_EXIT) {
             finish();
         }
     }
 
     /**
      * Función que genera el ContentValues para poder realizar el insert en la base de datos
+     *
      * @param periodo
      * @param valor
      */
-    public ContentValues generarContentValues(String periodo, Integer valor){
+    public ContentValues generarContentValues(String periodo, Integer valor) {
         ContentValues valores = new ContentValues();
         String fecha = getDateTime();
-        valores.put("fecha",fecha);
-        valores.put("periodo",periodo);
-        valores.put("valor",valor);
+        valores.put("fecha", fecha);
+        valores.put("periodo", periodo);
+        valores.put("valor", valor);
         return valores;
     }
 
@@ -175,7 +188,6 @@ public class RegistroGlucemias extends AppCompatActivity {
         Date date = new Date();
         return dateFormat.format(date);
     }
-
 
 
 }

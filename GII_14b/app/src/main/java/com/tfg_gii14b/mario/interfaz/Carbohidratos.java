@@ -19,6 +19,7 @@ import com.example.mario.gii_14b.BuildConfig;
 import com.tfg_gii14b.mario.calculos.CalculaBolo;
 import com.example.mario.gii_14b.R;
 import com.tfg_gii14b.mario.persistencia.DataBaseManager;
+import com.tfg_gii14b.mario.persistencia.ValoresPOJO;
 
 import java.util.ArrayList;
 
@@ -57,16 +58,79 @@ public class Carbohidratos extends AppCompatActivity {
     private String[] tipoAlimento;
     private String[] numeroTipoAlimento;
     private String[] alimento;
+
+    /**
+     * Datos de las raciones en gramos para cada tipo de alimento.
+     * Ver: http://www.fundaciondiabetes.org/upload/publicaciones_ficheros/71/TABLAHC.pdf.
+     */
     public static final int[] raciones =
-            {200, 50, 50, 50, 100, // Lacteos
-                    13, 38, 13, 40, 12, 13, // Cereales
-                    150, 100, 30, 25, 100, // Frutas
-                    300, 40, 300, 300, 500, // Hortalizas
-                    250, 15, 150, 140, 150, // Fruta grasa y seca
-                    130, 100, 0, 100, 250, // Bebidas,
-                    10, 10, 20, 20, 20 // Otros
+            {200, 50, 50, 50, 100, // Lacteos - 22
+                    200, 200, 200, 200, 20,
+                    25, 300, 50, 70, 250,
+                    0, 200, 125, 70, 70,
+                    100, 200, // Fin de lacteos
+                    //
+                    13, 38, 13, 40, 12, // Cereales - 74 - Fila 1
+                    13, 34, 17, 34, 15, // 2
+                    50, 14, 42, 15, 38, // 3
+                    15, 20, 15, 65, 50, // 4
+                    40, 16, 15, 14, 18, // 5
+                    20, 50, 100, 15, 17, // 6
+                    70, 30, 24, 20, 50, // 7
+                    20, 50, 50, 90, 20, // 8
+                    15, 53, 15, 20, 20, // 9
+                    20, 18, 23, 15, 15, // 10
+                    15, 15, 50, 16, 50, // 11
+                    35, 30, 20, 15, 80, // 12
+                    19, 48, 14, 90, 30, // 13
+                    100, 45, 12, 33, 14, // 14
+                    42, 16, 39, 33,      // 15
+
+                    0, 150, 100, 30, 25, // Frutas -  42 - linea 1
+                    100, 50, 100, 200, 150, // 2
+                    15, 150, 200, 70, 200,  // 3
+                    140, 100, 100, 0, 70,   // 4
+                    100, 100, 100, 50, 100, // 5
+                    50, 100, 150, 20, 150,  // 6
+                    100, 100, 100, 100, 125,    //7
+                    100, 100, 85, 60, 50,   // 8
+                    200, 50,    //9
+
+                    300, 40, 300, 300, 500, // Hortalizas - 42 - linea 1
+                    300, 0, 0, 0, 300,          // 2
+                    300, 200, 300, 150, 100,    // 3
+                    0, 0, 300, 0, 300,           // 4
+                    0, 0, 0, 0, 250,            // 5
+                    300, 0, 300, 200, 300,      // 6
+                    300, 300, 300, 150, 300,    // 7
+                    0, 300, 300, 300, 150,      // 8
+                    200, 225,                   // 9
+
+                    250, 15, 150, 140, 150, // Fruta grasa y seca - 15  - línea 1
+                    100, 15, 15, 15, 300,       // 2
+                    300, 80, 80, 100, 15,       // 3
+
+                    130, 100, 0, 100, 250, // Bebidas - 26 - línea 1
+                    80, 100, 0, 250, 250,       // 2
+                    300, 250, 0, 0, 75,         // 3
+                    300, 30, 70, 100, 200,      // 4
+                    100, 75, 0, 75, 100,        // 5
+                    250,                        // 6
+
+                    10, 10, 20, 20, 20,         // Otros - 57 - línea 1
+                    20, 12, 22, 120, 100,       // 2
+                    12, 17, 25, 25, 25,         // 3
+                    100, 40, 50, 23, 50,        // 4
+                    23, 10, 150, 62, 10,        // 5
+                    18, 50, 100, 130, 25,       // 6
+                    25, 11, 20, 0, 13,          // 7
+                    0, 20, 25, 35, 0,           // 8
+                    40, 15, 100, 100, 150,      // 9
+                    0, 100, 0, 0, 100,          // 10
+                    25, 0, 120, 25, 25,         // 11
+                    0, 15                       // 12
             };
-;
+    ;
 
 
     ArrayList<String> arrayAlimentos = new ArrayList<String>();
@@ -85,11 +149,11 @@ public class Carbohidratos extends AppCompatActivity {
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editor = misPreferencias.edit();
 
+        // Si la tabla de alimentos no estaba creada... se crea
         if (misPreferencias.getBoolean("tablaAlimentos", false) == false) {
             rellenarTablaAlimentos();
-        } else {
             editor.putBoolean("tablaAlimentos", true);
-            editor.commit();
+            editor.apply();
         }
 
         //Generamos los adaptadores para todos los posibles spinners
@@ -170,7 +234,7 @@ public class Carbohidratos extends AppCompatActivity {
         for (int i = 0; i < alimento.length; ++i) {
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "Procesando tipo de alimento: " + tipoAlimento[contadorNumeroTipoAlimento] +
-                        " Alimento: " + alimento[i]);
+                        " Alimento: " + alimento[i] + " 1 Ración en gramos: " + raciones[i]);
             }
             values.put("tipoAlimento", tipoAlimento[contadorNumeroTipoAlimento]);
             values.put("alimento", alimento[i]);
@@ -222,37 +286,48 @@ public class Carbohidratos extends AppCompatActivity {
      * @param view
      */
     public void finalizarOnClick(View view) {
-
-        EditText carboEt = (EditText) findViewById(R.id.et_gramos);
-        String carbo = carboEt.getText().toString();
-        int nracion = 0;
-
-        if (!carbo.equals("")) {
-            nracion = Integer.parseInt(carbo);
+        EditText gramosEt = (EditText) findViewById(R.id.et_gramos);
+        String gramos = gramosEt.getText().toString();
+        int numeroGramos = 0;
+        if (!gramos.equals("")) {
+            numeroGramos = Integer.parseInt(gramos);
         }
 
         DataBaseManager dbmanager = new DataBaseManager(this);
-        final Cursor cursorGlucemias = dbmanager.selectAlimento(comida);
-
-        if (cursorGlucemias.moveToFirst()) {
-            String n = cursorGlucemias.getString(3);
-            sumatorioRaciones += Integer.parseInt(n) * nracion;
+        final Cursor cursorAlimentos = dbmanager.selectAlimento(comida);
+        if (cursorAlimentos.moveToFirst()) {
+            String gramosPorRacion = cursorAlimentos.getString(COLUMNA_RACION);
+            // RMS: Cambiamos el cálculo de la formula en la versión 1.1
+            //sumatorioRaciones += Integer.parseInt(n) * nracion; // Versión 1.0
+            sumatorioRaciones += (numeroGramos * GRAMOS_DE_HC) / Double.parseDouble(gramosPorRacion);
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Grams per ration: " + gramosPorRacion + " Grams: " + numeroGramos);
+                Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
+            }
         }
 
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
+        // Cargar valores de preferencias
+        boolean rapida = misPreferencias.getBoolean(getString(R.string.rapida), false);
+        double insulinaBasal = Double.parseDouble(misPreferencias.getString(getString(R.string.udsBasal), "0"));
+        double insulinaRapida = Double.parseDouble(misPreferencias.getString(getString(R.string.udsRapida), "0"));
+        double glucemiaMinima = Double.parseDouble(misPreferencias.getString(getString(R.string.min), "0"));
+        double glucemiaMaxima = Double.parseDouble(misPreferencias.getString(getString(R.string.max), "0"));
+        ValoresPOJO valoresPOJO = new ValoresPOJO(rapida, insulinaBasal, insulinaRapida, glucemiaMinima, glucemiaMaxima);
 
-        String uds1txt = misPreferencias.getString(getString(R.string.udsBasal), "");
-        String uds2txt = misPreferencias.getString(getString(R.string.udsRapida), "");
-        String tipoEjer = misPreferencias.getString("tipoEjer", "");
-        int uds1 = Integer.parseInt(uds1txt);
-        int uds2 = Integer.parseInt(uds2txt);
-        int insulinaBasal = uds1 + uds2;
-        int ultimaMedicion = misPreferencias.getInt("glucemia", 0);
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
+        }
 
-        CalculaBolo cb = new CalculaBolo(ultimaMedicion, insulinaBasal, sumatorioRaciones);
+        CalculaBolo cb = new CalculaBolo(valoresPOJO, sumatorioRaciones);
+
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "Bolo calculado: " + cb);
+        }
 
         double boloResult = cb.calculoBoloCorrector();
-        String comentarioFinal = generaComentarioBolo(tipoEjer, boloResult);
+        //String comentarioFinal = generaComentarioBolo(tipoEjer, boloResult);
+        String comentarioFinal = generaComentarioBolo(boloResult);
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -269,32 +344,17 @@ public class Carbohidratos extends AppCompatActivity {
                         });
         AlertDialog alert = builder.create();
         alert.show();
-
     }
 
     /**
      * Función usada para generar el comentario final que se mostrara por pantalla
      *
-     * @param bolo          resultado del calculo del bolo corrector
-     * @param tipoEjercicio intensidad de la actividad fisica seleccionada
+     * @param bolo resultado del calculo del bolo corrector
      */
-    private String generaComentarioBolo(String tipoEjercicio, double bolo) {
-        String consejoEjercicio = "";
-        String comentario;
-
-        if (!tipoEjercicio.equals("")) {
-            if (tipoEjercicio.equals(INTENSIDAD_ALTA)) {
-                consejoEjercicio = getString(R.string.consejo_intensidad_alta);
-            } else if (tipoEjercicio.equals(INTENSIDAD_MEDIA)) {
-                consejoEjercicio = getString(R.string.consejo_intensidad_media);
-            } else if (tipoEjercicio.equals(INTENSIDAD_IRREGULAR)) {
-                consejoEjercicio = getString(R.string.consejo_intensidad_irregular);
-            }
-        }
-        if (bolo >= 0) {
-            comentario = getString(R.string.resultado_bolo) + " " + Double.toString(bolo) + " " + consejoEjercicio;
-        } else {
-            comentario = getString(R.string.ingerir_carbohidratos);
+    private String generaComentarioBolo(double bolo) {
+        String comentario = getString(R.string.resultado_bolo) + String.format("%.2f", bolo);
+        if (bolo < 0) {
+            comentario += "\n" + getString(R.string.ingerir_carbohidratos);
         }
         return comentario;
     }
