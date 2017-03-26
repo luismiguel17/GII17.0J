@@ -85,7 +85,7 @@
     <string name="bolo">Bolo corrector</string>
     <string name="title_activity_carbohidratos">Carbohidratos</string>
     <string name="tv_carbohidratos">Selecciona el alimento de la ingesta</string>
-    <string name="tv_valorgramos">Introuce el número de gramos del alimento</string>
+    <string name="tv_valorgramos">Introduce el número de gramos del alimento</string>
     <string name="bt_finalizar">Finalizar</string>
     <string name="aceptar">Aceptar</string>
 

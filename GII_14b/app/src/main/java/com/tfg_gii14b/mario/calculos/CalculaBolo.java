@@ -8,7 +8,8 @@ import com.tfg_gii14b.mario.persistencia.ValoresPOJO;
  * Cálculos del bolo corrector
  *
  * @author: Mario López Jiménez
- * @version: 1.0
+ * @author Raúl Marticorena Sánchez
+ * @version: 1.1
  */
 public class CalculaBolo { // extends AppCompatActivity {
 
@@ -44,9 +45,9 @@ public class CalculaBolo { // extends AppCompatActivity {
     }
 
     /**
-     * Realiza el calculo del factor de sensibilidad
+     * Realiza el calculo del factor de sensibilidad.
      *
-     * @return FSI
+     * @return FSI factor de sensibilidad
      */
     private double calculaFactorSensibilidad() {
         double suma = valores.getInsulinaBasal() + valores.getInsulinaRapida();
@@ -55,9 +56,9 @@ public class CalculaBolo { // extends AppCompatActivity {
     }
 
     /**
-     * Calcula la glucemia objetivo como la media de la
+     * Calcula la glucemia objetivo como la media de la glucemia máxima y la mínima.
      *
-     * @return
+     * @return glucemia objetivo
      */
     private double calculaGlucemiaObjetivo() {
         return (valores.getGlucemiaMaxima() + valores.getGlucemiaMinima()) / 2;
@@ -69,6 +70,11 @@ public class CalculaBolo { // extends AppCompatActivity {
     public double calculoBoloCorrector() {
         double operando1 = gramosHidratosCarbono / calculaRatio();
         double operando2 = (valores.getGlucemia() - calculaGlucemiaObjetivo()) / calculaFactorSensibilidad();
+        // Bug versión 1.1, "El resultado para el cálculo de insulina si la glucosa en sangre es menor de
+        // la glucemia objetivo, es negativo. DEBERIA SER CERO.
+        if (operando2 < 0) { // si es negativo el operando es negativo
+            operando2 = 0; // se toma valor cero
+        }
         return operando1 + operando2;
     }
 }

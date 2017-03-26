@@ -272,12 +272,26 @@ public class Carbohidratos extends AppCompatActivity {
             String gramosPorRacion = cursorAlimentos.getString(COLUMNA_RACION);
             // RMS: Cambiamos el cálculo de la formula en la versión 1.1
             //sumatorioRaciones += Integer.parseInt(n) * nracion; // Versión 1.0
-            sumatorioRaciones += (numeroGramos * GRAMOS_DE_HC) / Double.parseDouble(gramosPorRacion);
+            sumatorioRaciones += calcularGramosDeHidratosDeCarbono(numeroGramos, gramosPorRacion);
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "Grams per ration: " + gramosPorRacion + " Grams: " + numeroGramos);
                 Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
             }
         }
+    }
+
+    /**
+     * Calcula los gramos de HC para el alimento según los gramos ingeridos
+     *
+     * @param numeroGramos gramos ingeridos
+     * @param gramosPorRacion gramos por ración en la tabla de la federación española
+     * @return formula aplicada para el cálculo o cero si no es valorable
+     */
+    private double calcularGramosDeHidratosDeCarbono(int numeroGramos, String gramosPorRacion) {
+        if (Double.parseDouble(gramosPorRacion) == 0) {
+            return 0.0; // evita el bug de división por cero con alimentos con valor "no es valorable"
+        }
+        return (numeroGramos * GRAMOS_DE_HC) / Double.parseDouble(gramosPorRacion);
     }
 
     /**
@@ -301,7 +315,7 @@ public class Carbohidratos extends AppCompatActivity {
             String gramosPorRacion = cursorAlimentos.getString(COLUMNA_RACION);
             // RMS: Cambiamos el cálculo de la formula en la versión 1.1
             //sumatorioRaciones += Integer.parseInt(n) * nracion; // Versión 1.0
-            sumatorioRaciones += (numeroGramos * GRAMOS_DE_HC) / Double.parseDouble(gramosPorRacion);
+            sumatorioRaciones += calcularGramosDeHidratosDeCarbono(numeroGramos, gramosPorRacion);
             if (BuildConfig.DEBUG) {
                 Log.d(TAG, "Grams per ration: " + gramosPorRacion + " Grams: " + numeroGramos);
                 Log.d(TAG, "Current count of carbohidrates (HC): " + sumatorioRaciones);
@@ -324,8 +338,8 @@ public class Carbohidratos extends AppCompatActivity {
 
         CalculaBolo cb = new CalculaBolo(valoresPOJO, sumatorioRaciones);
 
-
-        double boloResult = cb.calculoBoloCorrector();
+        // Version 1.1.1, se calcula el bolo SIN DECIMALES, redondeando al entero más cercano.
+        int boloResult = (int) Math.rint(cb.calculoBoloCorrector());
 
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "Bolo calculado: " + boloResult);
@@ -355,8 +369,8 @@ public class Carbohidratos extends AppCompatActivity {
      *
      * @param bolo resultado del calculo del bolo corrector
      */
-    private String generaComentarioBolo(double bolo) {
-        String comentario = getString(R.string.resultado_bolo) + String.format(" %.2f", bolo);
+    private String generaComentarioBolo(int bolo) {
+        String comentario = getString(R.string.resultado_bolo) + String.format(" %d", bolo);
         if (bolo < 0) {
             comentario += "\n" + getString(R.string.ingerir_carbohidratos);
         }
