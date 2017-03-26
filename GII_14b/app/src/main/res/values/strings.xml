@@ -79,7 +79,7 @@
     <string name="consejo_intensidad_alta">Además para su actividad física, tome suplementos (10 a 20gr de hidratos de carbono), preferentemente líquidos cada 30-45 minutos.</string>
     <string name="consejo_intensidad_media">Además debe tomar un suplemento de 15 a 20 gr de hidratos de carbono, y realizar un control a la mitad y al final del ejercicio.</string>
     <string name="consejo_intensidad_irregular">Además no debe administrarse más insulina hasta concluir con la actividad física.</string>
-    <string name="bt_mascomida"> Añadir otro </string>
+    <string name="bt_mascomida">Añadir otro</string>
     <string name="resultado_bolo">Las unidades de insulina necesarias del bolo corrector son: </string>
     <string name="ingerir_carbohidratos">Nivel de glucemia demasiado bajo. Necesita ingerir carbohidratos.</string>
     <string name="bolo">Bolo corrector</string>

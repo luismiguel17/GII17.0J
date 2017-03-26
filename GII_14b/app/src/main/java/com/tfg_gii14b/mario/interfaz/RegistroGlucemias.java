@@ -109,17 +109,12 @@ public class RegistroGlucemias extends AppCompatActivity {
 
             if (insertar != -1) {
                 Toast.makeText(RegistroGlucemias.this, "Valor de glucemia guardado correctamente.", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Insertada glucemia con id: " + insertar);
             } else {
                 Toast.makeText(RegistroGlucemias.this, "Valor incorrecto, compruebe que ha introducido valores numéricos.", Toast.LENGTH_SHORT).show();
             }
 
-
             if (bolo) {
-                /*
-                Intent i= new Intent(this, ActividadFisica.class);
-                startActivityForResult(i, REQUEST_EXIT_BOLO);
-                */
-
                 // Eliminamos el paso de actividad física y se salta directamente
                 // al cálcuto de carbohidratos para el cálculo del bolo
                 Log.d(TAG, "Lanzando la actividad de carbohidratos.");
