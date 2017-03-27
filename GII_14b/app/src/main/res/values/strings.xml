@@ -48,7 +48,7 @@
     <!--- Strings de Menu principal -->
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_menu_principal">MenuPrincipal</string>
-    <string name="acerca_de">UBUDiabetes 1.1. Aplicación de control de la diabetes en dispositivos móviles. Realizada la versión 1.0 por Mario López Jimenez (febrero 2016). \n\nModificada por Raúl Marticorena Sánchez, en su versión 1.1 (febrero 2017).\n\nUniversidad de Burgos. 2017.</string>
+    <string name="acerca_de">UBUDiabetes 1.1. Aplicación de control de la diabetes en dispositivos móviles. Realizada la versión 1.0 por Mario López Jimenez (febrero 2016). \n\nModificada por Raúl Marticorena Sánchez, en su versión 1.1.1.0 (marzo 2017).\n\nUniversidad de Burgos. 2017.</string>
     <string name="bt_bolo">Calcular bolo</string>
     <string name="main_registro">Registro de glucemias</string>
     <string name="main_historial">Historial de glucemias</string>
