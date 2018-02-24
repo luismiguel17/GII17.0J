@@ -40,13 +40,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * onUpgrade. Metodo que actualizara nuestra Base de datos si las versiones no coinciden
+     * onUpgrade. Metodo que actualizara nuestra Base de datos.
+     * Si el usuario reinstala la app y encuentra una version antigua,elimina las tablas anteriores
+     * y las vuelve a crear.
      * @param db Base de datos.
      * @param oldVersion Version antigua de nuestra Base de datos.
      * @param newVersion Nueva version de nuestra Base de datos.
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS glucemias");
+        db.execSQL("DROP TABLE IF EXISTS incidencias");
+        db.execSQL("DROP TABLE IF EXISTS alimentos");
+        onCreate(db);
     }
 }
