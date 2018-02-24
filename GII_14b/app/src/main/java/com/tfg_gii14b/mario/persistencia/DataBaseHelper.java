@@ -11,16 +11,26 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
+    //Nombre de nuestra BD
     private static final String DB_NAME = "dataBase.sqlite";
+    //Version de nuestra BD
     private static final int DB_SCHEMA_VERSION = 1;
 
 
-
+    /**
+     * DataBaseHelper. Constructor.
+     * @param context Contexto actual.
+     */
     public DataBaseHelper(Context context) {
 
         super(context, DB_NAME, null, DB_SCHEMA_VERSION);
     }
 
+    /**
+     * onCreate. Metodo que realiza la creacion de las tablas
+     * de nuestra Base de Datos.
+     * @param db Base de Datos SQLite.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DataBaseManager.CREATE_ALIMENTOS);
@@ -29,6 +39,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * onUpgrade. Metodo que actualizara nuestra Base de datos si las versiones no coinciden
+     * @param db Base de datos.
+     * @param oldVersion Version antigua de nuestra Base de datos.
+     * @param newVersion Nueva version de nuestra Base de datos.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
