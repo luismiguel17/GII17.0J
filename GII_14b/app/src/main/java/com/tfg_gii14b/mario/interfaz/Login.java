@@ -23,7 +23,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         enlazarObjetos();
     }
 
@@ -35,9 +34,9 @@ public class Login extends AppCompatActivity {
 
         nomUsuario = (EditText)findViewById(R.id.et_nombre);
         password=(EditText)findViewById(R.id.et_password);
+        recuperarPass=(TextView)findViewById(R.id.tv_recuperarPassword);
+        registrarse=(TextView)findViewById(R.id.tv_registrarse);
         recordarPass=(CheckBox)findViewById(R.id.chb_login);
         entrar =(Button)findViewById(R.id.bt_entrar);
-        registrarse=(TextView)findViewById(R.id.tv_registrarse);
-        recuperarPass=(TextView)findViewById(R.id.tv_recuperarPassword);
     }
 }
