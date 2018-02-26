@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:paddingTop="80dp">
+
+        <TextView
+            android:id="@+id/tv_registrarse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:text="@string/crear_cuenta"
+            android:textAlignment="center"
+            android:textColor="#2E2EFE"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:inputType="textPersonName"
+            android:background="@drawable/edittextloginstyle"
+            android:hint="@string/nombre_de_usuario" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:background="@drawable/edittextloginstyle"
+            android:hint="@string/contrasena" />
+
+        <CheckBox
+            android:id="@+id/chb_login"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:textColor="#2E2EFE"
+            android:text="@string/recordar_contrasena"/>
+
+        <Button
+            android:id="@+id/bt_entrar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/entrar" />
+
+        <TextView
+            android:id="@+id/tv_recuperarPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="end"
+            android:text="@string/has_olvidado_tu_contrasena"
+            android:textColor="#2E2EFE"
+            android:autoLink="all"
+            android:linksClickable="true"/>
+    </LinearLayout>
+
+
+
+
+

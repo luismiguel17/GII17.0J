@@ -88,5 +88,11 @@
     <string name="tv_valorgramos">Introduce el número de gramos del alimento</string>
     <string name="bt_finalizar">Finalizar</string>
     <string name="aceptar">Aceptar</string>
+    <string name="nombre_de_usuario">Nombre de Usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="entrar">Entrar</string>
+    <string name="recordar_contrasena">¿Recordar Contraseña?</string>
+    <string name="has_olvidado_tu_contrasena">¿Has olvidado tu contraseña?</string>
+    <string name="crear_cuenta">Crear Cuenta</string>
 
 </resources>

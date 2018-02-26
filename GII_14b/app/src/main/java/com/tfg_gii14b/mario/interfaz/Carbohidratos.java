@@ -48,6 +48,7 @@ public class Carbohidratos extends AppCompatActivity {
      */
     public static final int COLUMNA_RACION = 2;
 
+    //Desplegables.
     private Spinner listaComida, listaTipo;
     private final int RESULT_EXIT = 0;
     /*
@@ -160,7 +161,6 @@ public class Carbohidratos extends AppCompatActivity {
 
         //Generamos los adaptadores para todos los posibles spinners
         final ArrayAdapter adpTipoAlimento = ArrayAdapter.createFromResource(this, R.array.spinerTipoAlimento, android.R.layout.simple_spinner_item);
-
         final ArrayAdapter adpLacteo = ArrayAdapter.createFromResource(this, R.array.spinerLacteos, android.R.layout.simple_spinner_item);
         final ArrayAdapter adpArroz = ArrayAdapter.createFromResource(this, R.array.spinerCereales, android.R.layout.simple_spinner_item);
         final ArrayAdapter adpFruta = ArrayAdapter.createFromResource(this, R.array.spinnerFrutas, android.R.layout.simple_spinner_item);
