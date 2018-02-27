@@ -31,7 +31,7 @@ public class DataBaseManager {
             +"tipo text not null,"
             +"observaciones text not null,"
             +"fecha text not null,"
-            +"glucemia integer not null)";
+            +"glucemia integer not null);";
 
     public static final String CREATE_ALIMENTOS = "create table alimentos("
             +"tipoAlimento text not null,"
@@ -42,23 +42,21 @@ public class DataBaseManager {
     public static final String CREATE_USUARIOS = "create table usuarios("
             +"id integer primary key autoincrement,"
             +"nombre text not null,"
-            +"apellidos text not null,"
             +"edad integer not null,"
             +"estatura integer not null,"
             +"peso integer not null,"
             +"glu_min integer not null,"
             +"glu_max integer not null,"
-            +"insu_basal text not null,"
-            +"insu_basal_dia integer not null,"
-            +"insu_basal_noche integer not null,"
-            +"password_cuenta text not null unique,);";
+            +"insu_bolo_tipo text not null,"
+            +"insu_basal integer not null,"
+            +"insu_basal_rap integer not null);";
+
     /**
      * Función que inserta una entrada en una determinada tabla
      */
     public long insertar(String tabla, ContentValues valores){
         long result;
         result= db.insert(tabla,null,valores);
-
         return result;
     }
 
@@ -102,4 +100,11 @@ public class DataBaseManager {
         return db.rawQuery("select * from Incidencias where Glucemia='"+idGlucemia+"'",null);
     }
 
+    //NUEVO
+    /**
+     * closeBD. Metodo que cierra la conexion de la BD.
+     */
+    public  void closeBD(){
+        db.close();
+    }
 }
