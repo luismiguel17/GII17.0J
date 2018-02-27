@@ -38,6 +38,20 @@ public class DataBaseManager {
             +"alimento text primary key,"
             +"racion int not null);";
 
+    //Nuevo-Cambio
+    public static final String CREATE_USUARIOS = "create table usuarios("
+            +"id integer primary key autoincrement,"
+            +"nombre text not null,"
+            +"apellidos text not null,"
+            +"edad integer not null,"
+            +"estatura integer not null,"
+            +"peso integer not null,"
+            +"glu_min integer not null,"
+            +"glu_max integer not null,"
+            +"insu_basal text not null,"
+            +"insu_basal_dia integer not null,"
+            +"insu_basal_noche integer not null,"
+            +"password_cuenta text not null unique,);";
     /**
      * Función que inserta una entrada en una determinada tabla
      */
@@ -52,6 +66,7 @@ public class DataBaseManager {
      * Función que devuelve el resultado de una consulta de todos los alimentos
      */
     public Cursor consultarAlimentos(){
+
         return db.rawQuery("select * from Alimentos",null);
     }
 

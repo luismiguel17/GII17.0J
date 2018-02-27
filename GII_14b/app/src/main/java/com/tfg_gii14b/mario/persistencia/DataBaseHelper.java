@@ -36,6 +36,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(DataBaseManager.CREATE_ALIMENTOS);
         db.execSQL(DataBaseManager.CREATE_GLUCEMIAS);
         db.execSQL(DataBaseManager.CREATE_INCIDENCIAS);
+        //Nuevo-Cambio
+        db.execSQL(DataBaseManager.CREATE_USUARIOS);
 
     }
 
@@ -52,6 +54,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS glucemias");
         db.execSQL("DROP TABLE IF EXISTS incidencias");
         db.execSQL("DROP TABLE IF EXISTS alimentos");
+        //Nuevo-Cambio
+        db.execSQL("DROP TABLE IF EXISTS usuarios");
 
         onCreate(db);
     }
