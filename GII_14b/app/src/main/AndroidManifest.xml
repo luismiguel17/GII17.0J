@@ -7,16 +7,20 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="true">
         <activity
             android:name="com.tfg_gii14b.mario.interfaz.Perfil"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden">
+
+        </activity>
         <activity
             android:name="com.tfg_gii14b.mario.interfaz.MenuPrincipal"
             android:label="Menú principal"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name="com.tfg_gii14b.mario.interfaz.RegistroGlucemias"
             android:label="Registro de glucemias"
@@ -27,19 +31,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.tfg_gii14b.mario.interfaz.MenuPrincipal" />
         </activity>
-        <activity
-            android:name="com.tfg_gii14b.mario.interfaz.ActividadFisica"
-            android:label="Actividad física"
-            android:parentActivityName="com.tfg_gii14b.mario.interfaz.RegistroGlucemias"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.tfg_gii14b.mario.interfaz.RegistroGlucemias" />
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity
             android:name="com.tfg_gii14b.mario.interfaz.Carbohidratos"
             android:label="Recuento de carbohidratos"
@@ -60,18 +52,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.tfg_gii14b.mario.interfaz.RegistroGlucemias" />
         </activity>
-        <activity android:name="com.tfg_gii14b.mario.interfaz.Launcher">
+
+        <activity
+            android:name="com.tfg_gii14b.mario.interfaz.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.tfg_gii14b.mario.interfaz.Historial"
             android:label="@string/title_activity_historial"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name="com.tfg_gii14b.mario.interfaz.Login"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name="com.tfg_gii14b.mario.interfaz.Login">
+
+        </activity>
     </application>
 
 </manifest>

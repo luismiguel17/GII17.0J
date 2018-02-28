@@ -62,9 +62,7 @@ public class Perfil extends AppCompatActivity {
         enlazarObjetos();
 
         //cargarPreferencias();
-        //Nuevo-Cambio
 
-        registrarUsuarios();
         
     }
 
@@ -77,28 +75,28 @@ public class Perfil extends AppCompatActivity {
 
         //nombre de usuario
         nombreEt = (EditText) findViewById(R.id.et_nombre);
-        nombre = nombreEt.getText().toString();
+        //nombre = nombreEt.getText().toString();
         //edad usuario
         edadEt = (EditText) findViewById(R.id.et_edad);
-        edad = Integer.parseInt(edadEt.getText().toString());
+        //edad = Integer.parseInt(edadEt.getText().toString());
         //estatura del usuario en cm
         estaturaEt = (EditText) findViewById(R.id.et_estatura);
-        estatura = Integer.parseInt(estaturaEt.getText().toString());
+        //estatura = Integer.parseInt(estaturaEt.getText().toString());
         //peso del usuario en kg
         pesoEt = (EditText) findViewById(R.id.et_peso);
-        peso=Integer.parseInt(pesoEt.getText().toString());
+        //peso=Integer.parseInt(pesoEt.getText().toString());
         //Glucemia maxima deseada en mg/dl
         maxEt = (EditText) findViewById(R.id.et_max);
-        maxVal = Integer.parseInt(maxEt.getText().toString());
+        //maxVal = Integer.parseInt(maxEt.getText().toString());
         //Glucemia minima deseada en mg/dl
         minEt = (EditText) findViewById(R.id.et_min);
-        minVal = Integer.parseInt(minEt.getText().toString());
+        //minVal = Integer.parseInt(minEt.getText().toString());
         //uds insulina basal
         uds1Et = (EditText) findViewById(R.id.et_udsBasal);
-        udsBas=Integer.parseInt(uds1Et.getText().toString());
+        //udsBas=Integer.parseInt(uds1Et.getText().toString());
         //uds insulina rapida
         uds2Et = (EditText) findViewById(R.id.et_udsRapida);
-        udsRap=Integer.parseInt(uds2Et.getText().toString());
+        //udsRap=Integer.parseInt(uds2Et.getText().toString());
 
 
         //Tipo insulina del bolo:rapida
@@ -116,6 +114,9 @@ public class Perfil extends AppCompatActivity {
 
     private Boolean comprobarRegistro() {
         Boolean result=true;
+        minVal = Integer.parseInt(minEt.getText().toString());
+        maxVal = Integer.parseInt(maxEt.getText().toString());
+
         if (minVal < 80 || maxVal > 250) {
             //Toast.makeText(Perfil.this, R.string.minmax_incorrecto, Toast.LENGTH_SHORT).show();
             Toast.makeText(getApplicationContext(),R.string.minmax_incorrecto,Toast.LENGTH_SHORT).show();
@@ -136,19 +137,24 @@ public class Perfil extends AppCompatActivity {
     }
 
     /**
-     * registrarUsuarios. Metodop que se encarga de almacenar los usuarios
+     * registrarUsuarios. Metodo que se encarga de almacenar los usuarios
      * en la BD.
      */
     private void registrarUsuarios() {
 
         Boolean result = comprobarRegistro();
+        nombre = nombreEt.getText().toString();
+        edad = Integer.parseInt(edadEt.getText().toString());
+        estatura = Integer.parseInt(estaturaEt.getText().toString());
+        peso=Integer.parseInt(pesoEt.getText().toString());
+        udsBas=Integer.parseInt(uds1Et.getText().toString());
+        udsRap=Integer.parseInt(uds2Et.getText().toString());
         //resultado de la insercion
         long insertar;
 
         if(result){
             //abrimos la conexion a la Bd
             dbmanager = new DataBaseManager(this);
-            //insertamos en la tabla usuarios
 
             //Realizamos las insercion dle usuario
             insertar = dbmanager.insertar("usuarios", generarContentValues(nombre,edad,estatura,peso,
@@ -164,7 +170,7 @@ public class Perfil extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "Error, Uusuario no insertado correctamente", Toast.LENGTH_SHORT).show();
                 //cerramos la BD
-                dbmanager.closeBD();
+                //dbmanager.closeBD();
             }
 
         }
@@ -196,6 +202,7 @@ public class Perfil extends AppCompatActivity {
         values.put("insu_bolo_tipo",tipo);
         values.put("insu_basal",udsB);
         values.put("insu_basal_rap",udsR);
+
         return values;
     }
     /**
@@ -237,9 +244,12 @@ public class Perfil extends AppCompatActivity {
      * Función que registra los datos introducidos en el perfil de usuario.
      * Realiza pruebas de validación de los datos introducidos antes de guardarlos.
      */
-    /**
+
     public void guardarperfilOnClick(View view) {
 
+        registrarUsuarios();
+
+        /**
         SharedPreferences misPreferencias = getSharedPreferences("PreferenciasUsuario", MODE_PRIVATE);
         SharedPreferences.Editor editorPreferencias = misPreferencias.edit();
 
@@ -300,6 +310,10 @@ public class Perfil extends AppCompatActivity {
 
             finish();
         }
+         */
+        //Nuevo-Cambio
+
+
     }
-     */
+
 }
